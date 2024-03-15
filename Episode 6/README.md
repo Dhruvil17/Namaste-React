@@ -1,0 +1,14 @@
+-   Header
+-   -   Logo
+-   -   NavItems
+-
+-   Body
+-   -   Search
+-   -   RestaurantContainer
+-           - RestaurantCard (Image, Name of Restaurant, Crusine, Star Rating, Delivery Time)
+-
+-   Footer
+-   -   Copyright
+-   -   Links
+-   -   Address
+-   -   Contact

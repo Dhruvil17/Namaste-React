@@ -1,0 +1,12 @@
+.Logo {
+    max-width: 5%;
+    display: flex;
+    margin-right: auto;
+    float: left;
+}
+
+.User {
+    max-width: 5%;
+    display: flex;
+    margin-left: auto;
+}
