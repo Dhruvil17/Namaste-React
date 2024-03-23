@@ -13,18 +13,29 @@ const Body = () => {
     }, []);
 
     const fetchData = async () => {
-        const data = await fetch(
-            "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.96340&lng=77.58550&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-        );
-        const json = await data.json();
-        setListOfRestaurants(
-            json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-                ?.restaurants
-        );
-        setFilteredRestaurant(
-            json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-                ?.restaurants
-        );
+        try {
+            const data = await fetch(
+                "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.96340&lng=77.58550&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+            );
+
+            if (!data.ok) {
+                throw new Error("Error in fetching data");
+            }
+
+            const json = await data.json();
+            const fetchListOfRestaurants =
+                json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+                    ?.restaurants;
+
+            if (!fetchListOfRestaurants) {
+                throw new Error("Data format is incorrect");
+            }
+
+            setListOfRestaurants(fetchListOfRestaurants);
+            setFilteredRestaurant(fetchListOfRestaurants);
+        } catch (error) {
+            console.log("Error in fetching data: ", error.message);
+        }
     };
 
     //Conditional Rendering
